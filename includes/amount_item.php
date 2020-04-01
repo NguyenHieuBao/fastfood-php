@@ -1,0 +1,12 @@
+<?php
+	session_start();
+	$id=$_POST['id'];
+	$soluong=$_POST['soluong'];
+	if(isset($_SESSION['cart'][$id]))
+	{
+		$_SESSION['cart'][$id]=$soluong;
+	}
+	else{
+		$_SESSION['cart'][$id]=$soluong;
+	}
+?>
