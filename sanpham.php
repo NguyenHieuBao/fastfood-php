@@ -14,7 +14,7 @@
 <div id="contain" style="margin-top: 2%;">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="search_im_md">
+					<div class="search_im_md" style="background-color: white;">
 						<label>
 							Tên sản phẩm:
 						</label>
@@ -52,13 +52,11 @@
 							</select>
 						</div>
 					</div>
-					
-					<?php  include("includes/product_posts.php");?>
 				</div>
 				<div class="col-md-9">
 					<div style="background-color:#d74b33;float: left;color: white;">
 						<h1 style="font-size: 18px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
-						    SẢN PHẨM
+						    Sản phẩm
 					    </h1>
 					</div>
 					<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>

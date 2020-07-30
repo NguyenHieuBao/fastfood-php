@@ -19,9 +19,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -74,6 +77,7 @@
 						      	<option value="0">Người dùng cuối</option>
 						      	<option value="1">Manager</option>
 						      	<option value="2">Admin</option>
+						      	<option value="3">Posts</option>
 						      </select>
 						    </div>
 						    <div class="mess">

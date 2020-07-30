@@ -13,6 +13,9 @@
 	if(isset($_GET['san-pham']) && $_GET['san-pham']!=null)
 	{
 		$url=$_GET['san-pham'];
+		if(!is_numeric($url)){
+			header('location:sanpham.php');
+		}
 		$query_item="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham WHERE masp=".$url;
 		$result_item=mysqli_query($dbc,$query_item);check_errors($result_item,$query_item);
 		if(mysqli_num_rows($result_item)<1)
@@ -57,30 +60,51 @@
 					<div class="list_banner_detail" style="margin-bottom: 5%;">
 						<div class="ctn_product_ttl">
 						    <span>
-							  SẢN PHẨM HOT
+							  Sản phẩm mới
 						    </span>
 						    <span style="float: right;margin-right: 5%;" >
 						    	<img src="IMAGES/icon_vmega.png">
 						    </span>
 					    </div>
 					    <?php
-						$query="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham ORDER BY masp LIMIT 7,4";
+					    date_default_timezone_set('Asia/Ho_Chi_Minh');
+						$now=date('Y-m-d H:i:s');
+						$query="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham ORDER BY masp desc LIMIT 4";
 						$result=mysqli_query($dbc,$query);check_errors($result,$query);
 						while(list($masp1,$tensp1,$gia1,$motasp1,$chitietsp1,$loaisp1,$linkhinh1)=mysqli_fetch_array($result,MYSQLI_NUM))
-					    {?>
-							<div class="item_1_detail">
+					    {
+					    	$query_tk1="SELECT sum(khuyenmai.giatrikhuyenmai) FROM khuyenmai, sanphamkhuyenmai WHERE '{$now}'<=thoigianketthuc and '{$now}'>=thoigianbatdau and khuyenmai.makm=sanphamkhuyenmai.makm and sanphamkhuyenmai.masp={$masp1} and khuyenmai.tinhtrang=1";
+							$result_tk1=mysqli_query($dbc,$query_tk1);check_errors($result_tk1,$query_tk1);
+							list($km)=mysqli_fetch_array($result_tk1,MYSQLI_NUM);
+					    ?>
+							<div class="item_1_detail" style="margin-bottom: 0;">
 								<div class="imge_dtl">
 									<a href="chitietsanpham.php?san-pham=<?php echo $masp1;?>">
 										<img src=<?php echo $linkhinh1;?>>
 									</a>
 								</div>
-								<div class="name_dtl">
-									<a href="chitietsanpham.php?san-pham=<?php echo $masp1;?>"><?php echo $tensp1;?></a>
+								<div class="name_dtl" style="margin-top: 3%;">
+									<a href="chitietsanpham.php?san-pham=<?php echo $masp1;?>"><?php echo ucwords($tensp1);?></a>
 								</div>
-								<div class="price_dtl" style="color: #d74b33;font-size: 16px;">
-									<?php echo $gia1;?> ₫
-								</div>
-								<div class="buy_dtl" style="margin-top: 4%;">
+								<?php
+									if(isset($km)){
+								?>
+									<div class="price_dtl" style="font-size: 16px;margin-top: 2%;">
+										<span style="text-decoration: line-through;"> <?php echo number_format($gia1,0,',','.'); ?> ₫ </span>
+										<span style="color: red;">
+											<?php echo number_format(($gia1-($gia1*$km)/100),0,',','.'); ?> ₫
+										</span>
+									</div>
+								<?php
+									}else{
+								?>
+										<div class="price_dtl" style="font-size: 16px;margin-top: 2%;">
+											<?php echo number_format($gia1,0,',','.'); ?> ₫
+										</div>
+								<?php
+									}
+								?>
+								<div class="buy_dtl" style="margin-top: 4%;margin-bottom: 1%;">
 									<input type="button" name="buyitem" value="Mua" onclick="addCart(<?php echo $masp1;?>);">
 								</div>
 							</div>
@@ -95,10 +119,10 @@
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12 clearfix" style="text-align: left;">
 						<div>
-							<h2 style="font-weight: both;margin-top:0;"><?php echo $tensp;?></h2>
+							<h2 style="font-weight: both;margin-top:0;"><?php echo ucwords($tensp);?></h2>
 						</div>
 						<div>
-							<span style="color:red;font-size:26px; "><?php echo $gia;?>đ</span>
+							<span style="color:red;font-size:26px; "><?php echo number_format($gia,0,',','.');?>đ</span>
 						</div>
 						<div>
 							<span style="font-size:22px;font-weight: both; ">Mã SP: #<?php echo $masp;?></span>

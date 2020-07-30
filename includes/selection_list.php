@@ -23,12 +23,12 @@
 					    			ĐĂNG KÝ
 					    		</a>
 					    	</li>
-					    	<li>
+					    	<!-- <li>
 					    		<a href="#">
 					    			<i class="fa fa-key">
 					    			</i>
-					    			QUÊN MẬT KHẨU
+					    			Thông tin cá nhân
 					    		</a>
-					    	</li>
+					    	</li> -->
 					    </ul>
 					</div>

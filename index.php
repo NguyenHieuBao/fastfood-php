@@ -35,7 +35,7 @@
 				<img src="IMAGES/banner_top.jpg">
 			</div>
 			<div id="md_product">
-				<div class="prt_title">
+				<div class="prt_title" style="padding: 10px 0 5px 0px;">
 					<div style="background-color:#d74b33;float: left;color: white;">
 						<h1 style="font-size: 18px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
 						    Sản phẩm nổi bật
@@ -45,25 +45,46 @@
 				</div>
 				<div class="row prt_lstmenu">
 					<?php
-						$query="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham ORDER BY masp LIMIT 15,4";
+						date_default_timezone_set('Asia/Ho_Chi_Minh');
+						$now=date('Y-m-d H:i:s');
+						$query="SELECT *, SUM(SoLuong) from sanphamtrongdonhang GROUP BY Masp ORDER BY SUM(SoLuong) DESC LIMIT 4";
 						$result=mysqli_query($dbc,$query);check_errors($result,$query);
-						while(list($masp,$tensp,$gia,$motasp,$chitietsp,$loaisp,$linkhinh)=mysqli_fetch_array($result,MYSQLI_NUM))
-					    {?>
+						while(list($masp,$madh,$tensp,$gia,$soluong,$tongtien,$linkhinh,$sum)=mysqli_fetch_array($result,MYSQLI_NUM))
+					    {
+					    	$query_tk1="SELECT sum(khuyenmai.giatrikhuyenmai) FROM khuyenmai, sanphamkhuyenmai WHERE '{$now}'<=thoigianketthuc and '{$now}'>=thoigianbatdau and khuyenmai.makm=sanphamkhuyenmai.makm and sanphamkhuyenmai.masp={$masp} and khuyenmai.tinhtrang=1";
+							$result_tk1=mysqli_query($dbc,$query_tk1);check_errors($result_tk1,$query_tk1);
+							list($km)=mysqli_fetch_array($result_tk1,MYSQLI_NUM);
+					?>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<div class="product-item">
 									<div class="prt_item_banner">
-										<a href="chitietsanpham.php?san-pham=<?php echo $masp;?>">
+										<a href="chitietsanpham.php?san-pham=<?php echo $masp;?>" style="float: none;">
 											<img src=<?php echo $linkhinh;?>>
 										</a>
 									</div>
-									<div class="prt_item_title">
+									<div class="prt_item_title" style="margin-top: 2%;">
 										<a href="chitietsanpham.php?san-pham=<?php echo $masp;?>">
-											<?php echo $tensp; ?>
+											<?php echo ucwords($tensp); ?>
 										</a>
 									</div>
-									<div class="prt_item_price">
-										<?php echo $gia; ?> ₫
-									</div>
+									<?php
+										if(isset($km)){
+									?>
+										<div class="prt_item_price">
+											<span style="text-decoration: line-through;"> <?php echo number_format($gia,0,',','.'); ?> ₫ </span>
+											<span style="color: red;">
+												<?php echo number_format(($gia-($gia*$km)/100),0,',','.'); ?> ₫
+											</span>
+										</div>
+									<?php
+										}else{
+									?>
+											<div class="prt_item_price">
+												<?php echo number_format($gia,0,',','.'); ?> ₫
+											</div>
+									<?php
+										}
+									?>
 									<div class="prt_item_buy" onclick="addCart(<?php echo $masp;?>);" style="cursor: pointer;">
 										<a>
 											MUA HÀNG

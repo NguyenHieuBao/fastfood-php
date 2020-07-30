@@ -26,7 +26,7 @@
 								<a href="giohang.php"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
 							</li>
 							<li>
-								<a href="quanlydonhang.php"><i class="fa fa-sign-in"></i>  <?php echo $_SESSION['user']['email'];?></a>
+								<a href="thongtintaikhoan.php"><i class="fa fa-sign-in"></i>  <?php echo $_SESSION['user']['email'];?></a>
 							</li>
 							<li>
 								<a href="dangxuat.php"><i class="fa fa-key"></i>  Đăng xuất</a>
@@ -73,15 +73,15 @@
 					</li>
 					<li class="s">/</li>
 					<li>
-						<a href="#" title="TIN TỨC">TIN TỨC</a>
+						<a href="tintuc.php" title="TIN TỨC">TIN TỨC</a>
 					</li>
 					<li class="s">/</li>
 					<li>
-						<a href="#" title="GIỚI THIỆU">GIỚI THIỆU</a>
+						<a href="gioithieu.php" title="GIỚI THIỆU">GIỚI THIỆU</a>
 					</li>
 					<li class="s">/</li>
 					<li>
-						<a href="#" title="LIÊN HỆ">LIÊN HỆ</a>
+						<a href="lienhe.php" title="LIÊN HỆ">LIÊN HỆ</a>
 					</li>
 					<li class="s">/</li>
 				</ul>

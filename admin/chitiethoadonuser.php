@@ -31,9 +31,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -54,7 +57,7 @@
 						    </thead>
 						    <tbody>
 						    	<?PHP
-							    		$query="SELECT masp,tensp,gia,soluong,tongtien,linkhinh FROM sanphamtrongdonhang";
+							    		$query="SELECT masp,tensp,gia,soluong,tongtien,linkhinh FROM sanphamtrongdonhang WHERE madh=".$_GET['ma-donhang'];
 										$result=mysqli_query($dbc,$query);check_errors($result,$query);$i=1;
 										while(list($masp,$tensp,$gia,$soluong,$tongtien,$linkhinh)=mysqli_fetch_array($result,MYSQLI_NUM))
 									    {?>

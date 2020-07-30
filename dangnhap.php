@@ -28,7 +28,7 @@
 	    }
 	    if(empty($errors))
 	    {
-	        $query_item="SELECT makh,taikhoan,email,diachi,hoten,dienthoai FROM khachhang WHERE taikhoan='".$taikhoan."' and matkhau='".$matkhau."' and trangthai=1";
+	        $query_item="SELECT makh,taikhoan,email,diachi,hoten,dienthoai FROM khachhang WHERE taikhoan='".$taikhoan."' and matkhau='".$matkhau."' and trangthai=1 and vaitro=0";
 			$result_item=mysqli_query($dbc,$query_item);check_errors($result_item,$query_item);
 	        if(mysqli_num_rows($result_item)==1)
 	        {

@@ -21,7 +21,7 @@
 				<div class="col-md-9">
 					<div style="background-color:#d74b33;float: left;color: white;">
 						<h1 style="font-size: 20px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
-						    ĐƠN HÀNG CỦA TÔI
+						    Đơn hàng của tôi
 					    </h1>
 					</div>
 					<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>
@@ -39,7 +39,7 @@
 						    </thead>
 						    <tbody>
 						    	<?PHP
-							    		$query="SELECT madh,tenkh,tongtien,tinhtrang FROM donhang WHERE makh=".$_SESSION['user']['uid'];
+							    		$query="SELECT madh,tenkh,tongtien,tinhtrang FROM donhang WHERE makh={$_SESSION['user']['uid']} order by madh desc";
 										$result=mysqli_query($dbc,$query);check_errors($result,$query);$i=1;
 										while(list($madh,$tenkh,$tongtien,$tinhtrang)=mysqli_fetch_array($result,MYSQLI_NUM))
 									    {?>
@@ -52,11 +52,11 @@
 										      			<span>#<?php echo $madh;?><span>
 										      		</a>
 										      	</td>
-										      	<td><?php echo $tenkh;?></td>
+										      	<td><?php echo ucwords($tenkh);?></td>
 										      	<td>
-										      			<?php echo $tongtien;?> đ
+										      			<?php echo number_format($tongtien,0,',','.');?> đ
 										      	</td>
-										      	<td>	<?php echo $tinhtrang;?></td>
+										      	<td>	<?php echo ucwords($tinhtrang);?></td>
 										      	<td class="price">
 										      		<a href="chitietdonhang.php?madonhang=<?php echo $madh;?>" style="color: red;">
 										      			<i class="fa fa-angle-double-right "></i>Xem đơn hàng

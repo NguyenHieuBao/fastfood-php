@@ -27,9 +27,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -50,12 +53,12 @@
 						      <input type="text" class="form-control" id="hoten" placeholder="Họ tên" value="<?php echo $hoten;?>" name="hoten">
 						    </div>
 						    <div class="form-group">
-						      <label for="diachi">Địa chỉ:</label>
-						      <input type="text" class="form-control" id="diachi" placeholder="Địa chỉ" value="<?php echo $diachi;?>" name="diachi">
+						      <label for="sdt">Số điện thoại: <span style="color: red;">(*)</span></label>
+						      <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại" value="<?php echo $dienthoai;?>" name="sdt">
 						    </div>
 						    <div class="form-group">
-						      <label for="sdt">Số điện thoại:</label>
-						      <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại" value="<?php echo $dienthoai;?>" name="sdt">
+						      <label for="diachi">Địa chỉ:</label>
+						      <input type="text" class="form-control" id="diachi" placeholder="Địa chỉ" value="<?php echo $diachi;?>" name="diachi">
 						    </div>
 						    <div class="form-group">
 						      <label for="gioitinh">Giới tính:</label>
@@ -89,8 +92,15 @@
 									      	echo "<option value='0'>Người dùng cuối</option>";
 									      	echo "<option value='1'>Manager</option>";
 									      	echo "<option value='2'>Admin</option>";
+									      	echo "<option value='3'>Posts</option>";
 							      		}
 							      		else if($vaitro==1){
+									      	echo "<option value='1'>Manager</option>";
+									      	echo "<option value='0'>Người dùng cuối</option>";
+									      	echo "<option value='2'>Admin</option>";
+									      	echo "<option value='3'>Posts</option>";
+							      		}else if($vaitro==3){
+									      	echo "<option value='3'>Posts</option>";
 									      	echo "<option value='1'>Manager</option>";
 									      	echo "<option value='0'>Người dùng cuối</option>";
 									      	echo "<option value='2'>Admin</option>";
@@ -98,10 +108,13 @@
 									      	echo "<option value='2'>Admin</option>";
 									      	echo "<option value='0'>Người dùng cuối</option>";
 							      			echo "<option value='1'>Manager</option>";
+									      	echo "<option value='3'>Posts</option>";
 							      		}
 						      		}
-						      		else{
-						      			echo "<option value='1' disabled>Manager</option>";
+						      		else if($_SESSION['usr']['vaitro']==1){
+						      			echo "<option value='1'>Manager</option>";
+						      		}else if($_SESSION['usr']['vaitro']==3){
+						      			echo "<option value='3'>Posts</option>";
 						      		}
 						      	?>
 						      </select>
@@ -120,7 +133,7 @@
 		var hoten=document.getElementById('hoten');
 		var gioitinh=document.getElementById('gioitinh').value;
 		var ngaysinh=document.getElementById('ngaysinh').value;
-		var dienthoai=document.getElementById('sdt').value;
+		var dienthoai=document.getElementById('sdt');
 		var diachi=document.getElementById('diachi').value;
 		var vaitro=document.getElementById('vaitro').value;
 		if(hoten.value==""){
@@ -133,6 +146,19 @@
 			if(pattern.test(hoten.value)==true){
 				alert("Họ tên không hợp lệ");
 				hoten.focus();
+				return false;
+			}
+		}
+		if(dienthoai=="")
+		{
+			alert("Số điện thoại không được để trống");
+			dienthoai.focus();
+			return false;
+		}else{
+			pattern=/^[0-9]{10,12}$/;
+			if(pattern.test(dienthoai.value)==false){
+				alert("Số điện thoại phải là số và có từ 10 đến 12 ký tự");
+				dienthoai.focus();
 				return false;
 			}
 		}
@@ -151,7 +177,7 @@
 		$.ajax({
 			type:"POST",
 			url:"includes/xuly_edit.php",
-			data:{id:makh,hoten:hoten.value,gioitinh:gioitinh,ngaysinh:ngaysinh,dienthoai:dienthoai,diachi:diachi,vaitro:vaitro},
+			data:{id:makh,hoten:hoten.value,gioitinh:gioitinh,ngaysinh:ngaysinh,dienthoai:dienthoai.value,diachi:diachi,vaitro:vaitro},
 			cache:false,
 			success:function(results){
 				$('.mess').html(results);

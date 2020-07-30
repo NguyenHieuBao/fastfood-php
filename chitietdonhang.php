@@ -21,7 +21,7 @@
 				<div class="col-md-9">
 					<div style="background-color:#d74b33;float: left;color: white;">
 						<h1 style="font-size: 20px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
-						    ĐƠN HÀNG CỦA TÔI
+						    Đơn hàng của tôi
 					    </h1>
 					</div>
 					<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>
@@ -60,13 +60,13 @@
 									      			<img src="<?php echo $linkhinh;?>"style="margin-top: -6px;">
 									      		</a>
 									      	</td>
-									      	<td><?php echo $tensp;?></td>
+									      	<td><?php echo ucwords($tensp);?></td>
 									      	<td>
-									      			<?php echo $gia;?>
+									      			<?php echo number_format($gia,0,',','.');?>
 									      	</td>
 									      	<td><?php echo $soluong;?></td>
 									      	<td class="price">
-									      		<?php echo $tongtien;?> đ
+									      		<?php echo number_format($tongtien,0,',','.');?> đ
 									      	</td>
 								     	</tr>
 								<?PHP }?>
@@ -91,13 +91,13 @@
 							<div class="col-md-7">
 								<div class="table_info">
 						  			<label style="font-size:17px;padding-left: 1%;">Tổng tiền thanh toán</label>
-						  			<span style="float: right;color: red;font-size:19px;margin-bottom: 5px;padding-right: 1%;"><?php echo $tongtien1;?> đ</span>
+						  			<span style="float: right;color: red;font-size:19px;margin-bottom: 5px;padding-right: 1%;"><?php echo number_format($tongtien1,0,',','.');?> đ</span>
 						  			<div style="float: right;clear: both;margin-bottom: 15px;padding-right: 1%;">
 						  				Bao gồm VAT
 						  			</div>
 						  			<div class="table_info_div">
 						  				<p>Trạng thái đơn hàng</p>
-						  				<p><?php echo $tinhtrang;?></p>
+						  				<p><?php echo ucwords($tinhtrang);?></p>
 						  			</div>
 					  			</div>
 							</div>

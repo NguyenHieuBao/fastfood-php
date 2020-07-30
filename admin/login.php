@@ -65,7 +65,7 @@
 	        if(mysqli_num_rows($result_item)==1)
 	        {
 	            list($id,$tenkh,$user,$vaitro,$email,$diachi,$gioitinh,$ngaysinh,$dienthoai)=mysqli_fetch_array($result_item,MYSQLI_NUM);
-		        if($vaitro==1 || $vaitro==2)
+		        if($vaitro==1 || $vaitro==2 || $vaitro==3)
 		        {
 		        	$_SESSION['usr']['uid']=$id;
 			        $_SESSION['usr']['user']=$tenkh;

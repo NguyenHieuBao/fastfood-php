@@ -31,9 +31,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>

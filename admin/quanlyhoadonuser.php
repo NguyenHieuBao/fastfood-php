@@ -19,9 +19,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -52,7 +55,8 @@
 						    </thead>
 						    <tbody>
 						    	<?PHP
-							    		$query="SELECT madh,makh,tenkh,tongtien,tinhtrang,thoigiandathang,hinhthucvanchuyen,hinhthucthanhtoan FROM donhang";
+						    			$stt=1;
+							    		$query="SELECT madh,makh,tenkh,tongtien,tinhtrang,thoigiandathang,hinhthucvanchuyen,hinhthucthanhtoan FROM donhang order by madh desc";
 										$result=mysqli_query($dbc,$query);check_errors($result,$query);$i=1;
 										while(list($madh,$makh,$hoten,$tongtien,$tinhtrang,$thoigiandathang,$hinhthucvanchuyen,$hinhthucthanhtoan)=mysqli_fetch_array($result,MYSQLI_NUM))
 									    {?>

@@ -55,20 +55,20 @@
 							      		<?php echo $i++;?>
 							      	</td>
 							      	<td>
-							      		<span><?php echo $tensp;?><span>
+							      		<span><?php echo ucwords($tensp);?><span>
 							      	</td>
-							      	<td class="price" style="color: black;"><?php echo $gia;?> đ</td>
+							      	<td class="price" style="color: black;"><?php echo number_format($gia,0,',','.');?> đ</td>
 							      	<td>
 							      		<?php echo $soluong;?>
 							      	</td>
-							      	<td class="price" style="color: black;"><?php echo $tongtien;?> đ</td>
+							      	<td class="price" style="color: black;"><?php echo number_format($tongtien,0,',','.');?> đ</td>
 						     	</tr>
 						<?PHP }?>
 				    </tbody>
   				</table>
   				<div style="width: 100%;text-align: right;">
   					<label>TỔNG THANH TOÁN:</label>
-  					<span style="color: red;font-size: 16px;margin-right: 8%;"><?php echo $total_price;?> đ</span>
+  					<span style="color: red;font-size: 16px;margin-right: 8%;"><?php echo number_format($total_price,0,',','.');?> đ</span>
   				</div>
 			</div>
 		</div>

@@ -1,94 +1,48 @@
 <div class="ctn_ports">
-						<div class="ctn_ports_ttl">
-							<span>
-								BÀI VIẾT NỔI BẬT
-							</span>
-							<span style="float: right;margin-right: 5%;">
-							    <img src="IMAGES/icon_vmega.png">
-							</span>
-						</div>
-					    <div class="ctn_ports_1">
-					    	<div tyle="width: 100%;">
-					    		<div class="ctn_ports_1_img">
-							    	<a href="#">
-							    		<img src="IMAGES/01_caa1b381-07d9-406b-56bd-a6b6c0c86845_large.jpg">
-							    	</a>
-					    		</div>
-					    	</div>
-					    	<div style="width: 100%;">
-					    		<div class="ctn_ports_1_ctn">
-							    	<a href="#">
-							    		Tặng 1 bánh pizza miễn phí cho ngày sinh nhật của bạn
-							    	</a>
-								</div>
-					    	</div>
-					    	<div class="ctn_ports_1_ps">
-					    		<p>
-						    		Tặng 1 bánh pizza miễn phí cho ngày sinh nhật của bạnTặng 1 pizza cỡ...
-								</p>
-					    	</div>
-					    </div>
-					    <div class="ctn_ports_1">
-					    	<div tyle="width: 100%;">
-					    		<div class="ctn_ports_1_img">
-							    	<a href="#">
-							    		<img src="IMAGES/banh_phu_socola_large.jpg">
-							    	</a>
-					    		</div>
-					    	</div>
-					    	<div style="width: 100%;">
-					    		<div class="ctn_ports_1_ctn">
-							    	<a href="#">
-							    		Khuyến mãi thứ 2, thứ 4, thứ 6 hàng tuần Khuyến mãi thứ 2, thứ 4, thứ 6 hàng tuần
-							    	</a>
-								</div>
-					    	</div>
-					    	<div class="ctn_ports_1_ps">
-					    		<p>
-						    		Mua 2 pizza cỡ lớn chỉ với 200.000đÁp dụng cho thứ 2, thứ 4, thứ...
-								</p>
-					    	</div>
-					    </div>
-					    <div class="ctn_ports_1">
-					    	<div tyle="width: 100%;">
-					    		<div class="ctn_ports_1_img">
-							    	<a href="#">
-							    		<img src="IMAGES/my_y_large.jpg">
-							    	</a>
-					    		</div>
-					    	</div>
-					    	<div style="width: 100%;">
-					    		<div class="ctn_ports_1_ctn">
-							    	<a href="#">
-							    		Khuyến mãi thứ 3, thứ 5 hàng tuần
-							    	</a>
-								</div>
-					    	</div>
-					    	<div class="ctn_ports_1_ps">
-					    		<p>
-						    		Mua 2 pizza cỡ lớn chỉ với 180.000đÁp dụng cho ngày thứ 3 và thứ...
-								</p>
-					    	</div>
-					    </div>
-					    <div class="ctn_ports_1">
-					     	<div tyle="width: 100%;">
-					    		<div class="ctn_ports_1_img">
-							    	<a href="#">
-							    		<img src="IMAGES/salad_thit_nuong_vi_large.jpg">
-							    	</a>
-					    		</div>
-					    	</div>
-					    	<div style="width: 100%;">
-					    		<div class="ctn_ports_1_ctn">
-							    	<a href="#">
-							    		Khuyến mãi thứ 3, thứ 5 hàng tuần
-							    	</a>
-								</div>
-					    	</div>
-					    	<div class="ctn_ports_1_ps">
-					    		<p>
-						    		Mua 2 pizza cỡ lớn chỉ với 180.000đÁp dụng cho ngày thứ 3 và thứ 5 hàng tuầnÁp dụng cho...
-								</p>
-					    	</div>
-					    </div>
+	<div class="ctn_ports_ttl">
+		<span>
+			Bài viết nổi bật
+		</span>
+		<span style="float: right;margin-right: 5%;">
+		    <img src="IMAGES/icon_vmega.png">
+		</span>
+	</div>
+	<?php
+    	function truncateString($str, $maxChars = 123, $holder = "...")
+		{
+		    if (strlen($str) > $maxChars) {
+		        return trim(substr($str, 0, $maxChars)) . $holder;
+		    } else {
+		        return $str;
+		    }
+		}
+	?>
+    <?php
+		$query="SELECT * FROM `tintuc` where tinhtrang=1 LIMIT 4";
+		$result=mysqli_query($dbc,$query);check_errors($result,$query);
+		while(list($matt,$tieude,$noidung,$thoigiandang,$hinhanh)=mysqli_fetch_array($result,MYSQLI_NUM))
+	    {?>
+		    <div class="ctn_ports_1">
+		     	<div tyle="width: 100%;">
+		    		<div class="ctn_ports_1_img">
+				    	<a href="chitiettintuc.php?matt=<?php echo $matt ?>">
+				    		<img src=<?php echo $hinhanh ?>>
+				    	</a>
+		    		</div>
+		    	</div>
+		    	<div style="width: 100%;">
+		    		<div class="ctn_ports_1_ctn">
+				    	<a href="chitiettintuc.php?matt=<?php echo $matt ?>">
+				    		<?php echo $tieude ?>
+				    	</a>
 					</div>
+		    	</div>
+		    	<div class="ctn_ports_1_ps">
+		    		<p>
+			    		<?php echo truncateString($noidung) ?>
+					</p>
+		    	</div>
+		    </div>
+		<?PHP }
+	?>
+</div>

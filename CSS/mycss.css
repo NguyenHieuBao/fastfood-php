@@ -312,7 +312,6 @@ ul
 }
 .prt_item_banner a{
 	width: 100%;
-	float: left;
 	text-decoration: none;
 }
 .prt_item_banner a img{
@@ -931,7 +930,6 @@ a {
 	cursor: pointer;
 }
 .search_im_md{
-	background-color: #dddddd;
 	width: 100%;
 	margin-top: 5%;
 	margin-bottom: 5%;
@@ -941,4 +939,8 @@ a {
 .search_im_md select{
 	width: 80%;
 	padding:3px;
+}
+.search_im_md label{
+	margin-bottom: 6px;
+    margin-top: 2%;
 }

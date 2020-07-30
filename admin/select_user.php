@@ -54,6 +54,8 @@
 					echo "Khách hàng";
 				}else if($vaitro==1){
 					echo "Manager";
+				}else if($vaitro==3){
+					echo "Posts";
 				}else{
 					echo "Admin";
 				}

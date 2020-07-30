@@ -32,9 +32,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -84,13 +87,21 @@
 								      	echo "<option value='0'>Người dùng cuối</option>";
 								      	echo "<option value='1'>Manager</option>";
 								      	echo "<option value='2'>Admin</option>";
+								      	echo "<option value='3'>Posts</option>";
 						      		}
 						      		else if($vaitro==1){
 								      	echo "<option value='1'>Manager</option>";
 								      	echo "<option value='0'>Người dùng cuối</option>";
 								      	echo "<option value='2'>Admin</option>";
-						      		}else{
+								      	echo "<option value='3'>Posts</option>";
+						      		}else if($vaitro==3){
+								      	echo "<option value='3'>Posts</option>";
 								      	echo "<option value='2'>Admin</option>";
+								      	echo "<option value='0'>Người dùng cuối</option>";
+						      			echo "<option value='1'>Manager</option>";
+						      		}else if($vaitro==2){
+								      	echo "<option value='2'>Admin</option>";
+								      	echo "<option value='3'>Posts</option>";
 								      	echo "<option value='0'>Người dùng cuối</option>";
 						      			echo "<option value='1'>Manager</option>";
 						      		}

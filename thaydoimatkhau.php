@@ -24,7 +24,7 @@
 				<div class="col-md-9">
 					<div style="background-color:#d74b33;float: left;color: white;">
 						<h1 style="font-size: 21px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
-						    THAY ĐỔI MẬT KHẨU
+						    Thay đổi mật khẩu
 					    </h1>
 					</div>
 					<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>

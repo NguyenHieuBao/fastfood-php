@@ -14,36 +14,36 @@
 	$result=mysqli_query($dbc,$query);check_errors($result,$query);
 	while(list($masp,$tensp,$gia,$loaisp,$linkhinh,$chitietsp)=mysqli_fetch_array($result,MYSQLI_NUM))
 	{?>
-											<tr>
-										      	<td>
-										      		<?php echo $masp;?>
-										      	</td>
-										      	<td>
-										      		<img src='../<?php echo $linkhinh;?>' class="img_table">
-										      	</td>
-										      	<td>
-													<?php echo $tensp;?>
-										      	</td>
-										      	<td>
-										      		<?php echo $gia;?> đ
-										      	</td>
-										      	<td>
-										      		<?php echo $loaisp;?>
-										      	</td>
-										      	<td style="text-align:center;">
-										      		<a href="chitietsanpham.php?id=<?php echo $masp;?>" style="color:red;">
-										      			>>Xem chi tiết
-										      		</a>
-										      	</td>
-										      	<td  style="text-align: center;">
-										      		<a href="edit_sanpham.php?id=<?php echo $masp;?>">
-														<img src="../IMAGES/icon_edit.png" class="img_tb2">
-													</a>
-										      	</td>
-										      	<td style="text-align: center;">
-										      		<a onclick="messDelete(<?php echo $masp;?>);">
-										      			<img src="../IMAGES/icon_delete.png" class="img_tb2">
-										      		</a>
-										      	</td>
-									     	</tr>
-									<?PHP }?>
+		<tr>
+	      	<td>
+	      		<?php echo $masp;?>
+	      	</td>
+	      	<td>
+	      		<img src='../<?php echo $linkhinh;?>' class="img_table">
+	      	</td>
+	      	<td>
+				<?php echo $tensp;?>
+	      	</td>
+	      	<td>
+	      		<?php echo $gia;?> đ
+	      	</td>
+	      	<td style="text-align: center;">
+	      		<?php echo $loaisp;?>
+	      	</td>
+	      	<td style="text-align:center;">
+	      		<a href="chitietsanpham.php?id=<?php echo $masp;?>" style="color:red;">
+	      			>>Xem chi tiết
+	      		</a>
+	      	</td>
+	      	<td style="text-align: center;">
+	      		<a href="edit_sanpham.php?id=<?php echo $masp;?>">
+					<img src="../IMAGES/icon_edit.png" class="img_tb2">
+				</a>
+	      	</td>
+	      	<td style="text-align: center;">
+	      		<a onclick="messDelete(<?php echo $masp;?>);">
+	      			<img src="../IMAGES/icon_delete.png" class="img_tb2">
+	      		</a>
+	      	</td>
+     	</tr>
+<?PHP }?>

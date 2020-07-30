@@ -47,12 +47,18 @@
 					}
 					if($d == 1)
 					{
+						date_default_timezone_set('Asia/Ho_Chi_Minh');
+						$now=date('Y-m-d H:i:s');
 						$str=implode(",",$item);
 						$query="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham WHERE masp in ($str)";
 						$results=mysqli_query($dbc,$query);
 						check_errors($results,$query);
 						while(list($masp,$tensp,$gia,$motasp,$chitietsp,$loaisp,$linkhinh)=mysqli_fetch_array($results,MYSQLI_NUM))
-					    {?>
+					    {
+					    	$query_tk1="SELECT sum(khuyenmai.giatrikhuyenmai) FROM khuyenmai, sanphamkhuyenmai WHERE '{$now}'<=thoigianketthuc and '{$now}'>=thoigianbatdau and khuyenmai.makm=sanphamkhuyenmai.makm and sanphamkhuyenmai.masp={$masp} and khuyenmai.tinhtrang=1";
+							$result_tk1=mysqli_query($dbc,$query_tk1);check_errors($result_tk1,$query_tk1);
+							list($km)=mysqli_fetch_array($result_tk1,MYSQLI_NUM);
+					    	?>
 							<tr id="#<?php echo $masp;?>">
 						      	<td>
 						      		<a>
@@ -61,10 +67,10 @@
 						      	</td>
 						      	<td>
 									<a>
-						      			<span><?php echo $tensp;?><span>
+						      			<span><?php echo ucwords($tensp);?><span>
 						      		</a>
 						      	</td>
-						      	<td class="price"><?php echo $gia;?>đ</td>
+						      	<td class="price"><?php echo number_format(($gia-($gia*$km)/100),0,',','.'); ?>đ</td>
 						      	<td>
 						      		<script type="text/javascript">
 						      			function sanpham(masp,gia)
@@ -93,9 +99,9 @@
 											}
 											sessionStorage.setItem("addCart", JSON.stringify(addCart));
 										}
-						      			addSession(<?php echo $masp;?>,<?php echo $gia;?>);
+						      			addSession(<?php echo $masp;?>,<?php echo ($gia-($gia*$km)/100);?>);
 						      		</script>
-						      		<input type="number" name="item_amount" value="<?php echo $_SESSION['cart'][$masp];?>" class="item_amount" min="1" id="item_amount<?php echo $masp;?>" onkeyup="amountItem(<?php echo $masp;?>,<?php echo $gia;?>);" onchange="amountItem(<?php echo $masp;?>,<?php echo $gia;?>);">
+						      		<input type="number" name="item_amount" value="<?php echo $_SESSION['cart'][$masp];?>" class="item_amount" min="1" id="item_amount<?php echo $masp;?>" onkeyup="amountItem(<?php echo $masp;?>,<?php echo ($gia-($gia*$km)/100);?>);" onchange="amountItem(<?php echo $masp;?>,<?php echo ($gia-($gia*$km)/100);?>);">
 						      	</td>
 						      	<td class="price" id="price_tl<?php echo $masp;?>">
 						      		<script type="text/javascript">
@@ -112,7 +118,7 @@
 												}
 											}
 											sessionStorage.setItem('totalPrice', totalPrice);
-											$('.total_price').html(totalPrice+' đ');
+											$('.total_price').html(totalPrice.toLocaleString()+' đ');
 										}
 										function editCartAjax(masp,soluong)
 										{
@@ -146,9 +152,9 @@
 											addSession(masp,price);
 											total_price();
 											editCartAjax(masp,a);
-						      				document.getElementById(id2).innerHTML=price+' đ';
+						      				document.getElementById(id2).innerHTML=price.toLocaleString()+' đ';
 										}
-						      			amountItem(<?php echo $masp;?>,<?php echo $gia;?>);
+						      			amountItem(<?php echo $masp;?>,<?php echo ($gia-($gia*$km)/100);?>);
 						      		</script>
 						      	</td>
 						      	<td class="price">

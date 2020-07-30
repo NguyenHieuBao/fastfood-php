@@ -51,7 +51,7 @@
 	</div>
 		<div class="row tt_item">
 			<div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
-				<h4>1. ĐỊA CHỈ THANH TOÁN VÀ GIAO HÀNG</h4>
+				<h4>1. Địa chỉ thanh toán và giao hàng</h4>
 				<div class="info_ctm">
 					<h5>THÔNG TIN THANH TOÁN</h5>
 					<div class="info">
@@ -100,7 +100,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
-				<h4>2. THANH TOÁN VÀ VẬN CHUYỂN</h4>
+				<h4>2. Thanh toán và vận chuyển</h4>
 				<div class="trsport">
 					<h2>VẬN CHUYỂN</h2>
 					<div class="form-group trsport_div">
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
-				<h4>3. THÔNG TIN ĐƠN HÀNG</h4>
+				<h4>3. Thông tin đơn hàng</h4>
 				<div class="info_order">
 					<?PHP
 						$d=0;
@@ -140,9 +140,14 @@
 							$str=implode(",",$item);
 							$query="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham WHERE masp in ($str)";
 							$results=mysqli_query($dbc,$query);
-							check_errors($results,$query);
+							check_errors($results,$query);date_default_timezone_set('Asia/Ho_Chi_Minh');
+							$now=date('Y-m-d H:i:s');
 							while(list($masp,$tensp,$gia,$motasp,$chitietsp,$loaisp,$linkhinh)=mysqli_fetch_array($results,MYSQLI_NUM))
-						    {	$totalprice+=$gia*$_SESSION['cart'][$masp];
+						    {
+						    	$query_tk1="SELECT sum(khuyenmai.giatrikhuyenmai) FROM khuyenmai, sanphamkhuyenmai WHERE '{$now}'<=thoigianketthuc and '{$now}'>=thoigianbatdau and khuyenmai.makm=sanphamkhuyenmai.makm and sanphamkhuyenmai.masp={$masp} and khuyenmai.tinhtrang=1";
+								$result_tk1=mysqli_query($dbc,$query_tk1);check_errors($result_tk1,$query_tk1);
+								list($km)=mysqli_fetch_array($result_tk1,MYSQLI_NUM);
+							    	$totalprice+=($gia-($gia*$km)/100)*$_SESSION['cart'][$masp];
 						    ?>
 								<div class="order">
 									<span>
@@ -151,24 +156,24 @@
 										</a>
 									</span>
 									<div class="name_item">
-										<a href="#"><?php echo $tensp.' x '.$_SESSION['cart'][$masp];?></a>
+										<a href="#"><?php echo ucwords($tensp).' x '.$_SESSION['cart'][$masp];?></a>
 									</div>
-									<span class="price_item price"><?php echo $gia*$_SESSION['cart'][$masp];?> ₫</span>
+									<span class="price_item price"><?php echo number_format(($gia-($gia*$km)/100)*$_SESSION['cart'][$masp],0,',','.');?> ₫</span>
 								<div class="clear"></div>
 								</div>
 						    <?PHP } ?>
 								<div class="ttl_price">
 									<span class="prc">Thành tiền</span>
-									<span class="mny_prc" style="font-weight: 600;font-size: 16px;"> <?php echo $totalprice;?>₫</span>
+									<span class="mny_prc" style="font-weight: 600;font-size: 16px;"> <?php echo number_format($totalprice,0,',','.');?>₫</span>
 								</div>
 								<div class="ttl_price">
-									<span class="prc">Phí vận chuyển</span>
+									<span class="prc">Phí VAT</span>
 									<span class="mny_prc">30.000 ₫</span>
 								</div>
 								<div class="ttl_price">
 									<span class="prc">Thanh toán</span>
 									<span class="mny_prc" id="tltl_pr" style="color: red;font-size: 16px;">
-										<?php echo ($totalprice+30000);?>
+										<?php echo number_format(($totalprice+30000),0,',','.');?>
 									 ₫</span>
 								</div>
 								<div class="btn_order_div">
@@ -208,7 +213,7 @@
 					return;
 				}
 			}
-			pattern=/^(086|096|097|098|032|033|034|035|036|037|038|039|089|090|093|070|079|077|076|078|088|091|094|083|084|085|081|082|092|056|058|099|059)\d{7}$/;
+			pattern=/^[0-9]{10,12}$/;
 			if(pattern.test(dienthoai.value)==false){
 				alert("Số điện thoại không hợp lệ");
 				dienthoai.focus();

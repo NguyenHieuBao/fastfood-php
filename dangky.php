@@ -75,7 +75,7 @@
 				            <div class="form-group">
 				                <label for="ngaysinh" class="col-sm-3 control-label">Ngày sinh </label>
 				                <div class="col-sm-9">
-				                    <input type="text" class="form-control" name="ngaysinh" id="ngaysinh" placeholder="DD/MM/YYYY" />
+				                    <input type="text" class="form-control" name="ngaysinh" id="ngaysinh" placeholder="Ngày/Tháng/Năm" />
 				                </div>
 				            </div>
 				            <div class="form-group">

@@ -19,9 +19,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>
@@ -40,6 +43,7 @@
 					    		<option value="0">Khách hàng</option>
 					    		<option value="1">Manager</option>
 					    		<option value="2">Admin</option>
+					    		<option value="3">Posts</option>
 					    	</select>
 					    </div>
 					    <div style="clear: both;margin: 6%;"></div>
@@ -97,6 +101,8 @@
 															echo "Khách hàng";
 														}else if($vaitro==1){
 															echo "Manager";
+														}else if($vaitro==3){
+															echo "Posts";
 														}else{
 															echo "Admin";
 														}

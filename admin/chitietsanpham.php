@@ -13,6 +13,9 @@
 		if(isset($_GET['id']) && $_GET['id']!=null)
 		{
 			$url=$_GET['id'];
+			if(!is_numeric($url)){
+				header('location:quanlysanpham.php');
+			}
 			$query_item="SELECT tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham WHERE masp=".$url;
 			$result_item=mysqli_query($dbc,$query_item);check_errors($result_item,$query_item);
 			if(mysqli_num_rows($result_item)<1)
@@ -32,9 +35,12 @@
 						{
 							include('includes/menu_left1.php');
 						}
-						else
+						else if($_SESSION['usr']['vaitro']==1){
+							include('includes/menu_left.php');
+						}
+						else if($_SESSION['usr']['vaitro']==3)
 						{
-							 include('includes/menu_left.php');
+							 include('includes/menu_left3.php');
 						}
 					?>
 				</div>

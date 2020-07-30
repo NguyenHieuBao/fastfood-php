@@ -34,13 +34,13 @@
 									    <img src="<?php echo $linkhinh;?>"style="margin-top: -6px;">
 									</a>
 								</td>
-								<td><?php echo $tensp;?></td>
+								<td><?php echo ucwords($tensp);?></td>
 								<td>
-									<?php echo $gia;?>
+									<?php echo number_format($gia,0,',','.');?>
 								</td>
 								<td><?php echo $soluong;?></td>
 								<td class="price">
-									<?php echo $tongtien;?> đ
+									<?php echo number_format($tongtien,0,',','.');;?> đ
 								</td>
 							</tr>
 						<?PHP }?>
@@ -52,7 +52,7 @@
 				<div class="col-md-5">
 					<div class="table_user_info">
 						<label style="border-bottom: solid red 1px;">
-							THÔNG TIN GIAO HÀNG
+							Thông tin giao hàng
 						</label>
 						<div>
 							[Anh/Chị] <?php echo $tenkh;?>

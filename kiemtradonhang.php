@@ -2,7 +2,7 @@
 		<div id="contain" style="margin-top: 2%;">
 			<div style="background-color:#d74b33;float: left;color: white;">
 				<h1 style="font-size: 24px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
-				KIỂM TRA ĐƠN HÀNG
+				Kiểm tra đơn hàng
 				</h1>
 			</div>
 			<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>

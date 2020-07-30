@@ -1,83 +1,48 @@
 <div class="dtl_ports">
-						<div class="dtl_ports_ttl">
-							<span>TIN ẨM THỰC</span>
+	<div class="dtl_ports_ttl">
+		<div style="background-color:#d74b33;float: left;color: white;">
+			<h1 style="font-size: 18px; font-weight: normal; padding: 0 12px; text-align: left; margin: 0!important;line-height: 31px">
+			    Tin ẩm thực
+		    </h1>
+		</div>
+		<div style="border-bottom:solid 1px #d74b33;clear: both;padding-top: 0.2%;"></div>
+	</div>
+	<div class="news-slide">
+		<?php
+	    	function truncateString1($str, $maxChars = 123, $holder = "...")
+			{
+			    if (strlen($str) > $maxChars) {
+			        return trim(substr($str, 0, $maxChars)) . $holder;
+			    } else {
+			        return $str;
+			    }
+			}
+		?>
+	    <?php
+			$query="SELECT * FROM `tintuc` where tinhtrang=1 LIMIT 4";
+			$result=mysqli_query($dbc,$query);check_errors($result,$query);
+			while(list($matt,$tieude,$noidung,$thoigiandang,$hinhanh)=mysqli_fetch_array($result,MYSQLI_NUM))
+		    {?>
+				<div class="col-md-3 col-sm-3 col-xs-12" style="padding: 0;">
+					<div class="product-item" style="margin-left: 2%;">
+						<div class="prt_item_banner">
+							<a href="chitiettintuc.php?matt=<?php echo $matt ?>">
+								<img src=<?php echo $hinhanh?>>
+							</a>
 						</div>
-						<div class="news-slide">
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<div class="product-item">
-									<div class="prt_item_banner">
-										<a href="#">
-											<img src="IMAGES/my_y_large.jpg">
-										</a>
-									</div>
-									<div class="prt_item_title">
-										<a href="#">
-											Khuyến mãi thứ 3, thứ 5 hàng tuần
-										</a>
-									</div>
-									<div class="prt_item_price2">
-										<p>
-										    Mua 2 pizza cỡ lớn chỉ với 180.000đÁp dụng cho ngày thứ 3 và thứ...
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<div class="product-item">
-									<div class="prt_item_banner">
-										<a href="#">
-											<img src="IMAGES/01_caa1b381-07d9-406b-56bd-a6b6c0c86845_large.jpg">
-										</a>
-									</div>
-									<div class="prt_item_title">
-										<a href="#">
-											Tặng 1 bánh pizza miễn phí cho ngày sinh nhật của bạn
-										</a>
-									</div>
-									<div class="prt_item_price2">
-										<p>
-										    Tặng 1 bánh pizza miễn phí cho ngày sinh nhật của bạnTặng 1 pizza cỡ...
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<div class="product-item">
-									<div class="prt_item_banner">
-										<a href="#">
-											<img src="IMAGES/salad_thit_nuong_vi_large.jpg">
-										</a>
-									</div>
-									<div class="prt_item_title">
-										<a href="#">
-											Khuyến mãi thứ 3, thứ 5 hàng tuần
-										</a>
-									</div>
-									<div class="prt_item_price2">
-										<p>
-										    Mua 2 pizza cỡ lớn chỉ với 180.000đÁp dụng cho ngày thứ 3 và thứ 5 hàng tuầnÁp dụng cho...
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<div class="product-item">
-									<div class="prt_item_banner">
-										<a href="#">
-											<img src="IMAGES/banh_phu_socola_large.jpg">
-										</a>
-									</div>
-									<div class="prt_item_title">
-										<a href="#">
-											Khuyến mãi thứ 2, thứ 4, thứ 6 hàng tuần Khuyến mãi thứ 2, thứ 4, thứ 6 hàng tuần
-										</a>
-									</div>
-									<div class="prt_item_price2">
-										<p>
-										    Mua 2 pizza cỡ lớn chỉ với 200.000đÁp dụng cho thứ 2, thứ 4, thứ...
-										</p>
-									</div>
-								</div>
-							</div>
+						<div class="prt_item_title">
+							<a href="chitiettintuc.php?matt=<?php echo $matt ?>">
+								<?php echo $tieude ?>
+							</a>
+						</div>
+						<div class="prt_item_price2">
+							<p>
+							    <?php echo truncateString1($noidung) ?>
+							</p>
 						</div>
 					</div>
+				</div>
+			<?PHP }
+		?>
+	</div>
+</div>

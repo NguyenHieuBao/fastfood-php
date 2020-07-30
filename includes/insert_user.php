@@ -40,8 +40,15 @@
 				$query_tk="SELECT masp,tensp,gia,motasp,chitietsp,loaisp,linkhinh FROM sanpham WHERE masp=".$k;
 				$result_tk=mysqli_query($dbc,$query_tk);check_errors($result_tk,$query_tk);
 				list($masp,$tensp,$gia,$motasp,$chitietsp,$loaisp,$linkhinh)=mysqli_fetch_array($result_tk,MYSQLI_NUM);
-				$price_item=$v*$gia;
-				$query_db="INSERT INTO sanphamtrongdonhang(masp,madh,tensp,gia,soluong,tongtien,linkhinh) VALUES('$k','$madh','$tensp','$gia','$v','$price_item','$linkhinh')";
+
+				$query_tk1="SELECT sum(khuyenmai.giatrikhuyenmai) FROM khuyenmai, sanphamkhuyenmai WHERE '{$date}'<=thoigianketthuc and '{$date}'>=thoigianbatdau and khuyenmai.makm=sanphamkhuyenmai.makm and sanphamkhuyenmai.masp={$k} and khuyenmai.tinhtrang=1";
+				$result_tk1=mysqli_query($dbc,$query_tk1);check_errors($result_tk1,$query_tk1);
+				list($km)=mysqli_fetch_array($result_tk1,MYSQLI_NUM);
+
+				$price_item=$v*($gia-($gia*$km)/100);
+
+				$tien=($gia-($gia*$km)/100);
+				$query_db="INSERT INTO sanphamtrongdonhang(masp,madh,tensp,gia,soluong,tongtien,linkhinh) VALUES('$k','$madh','$tensp','$tien','$v','$price_item','$linkhinh')";
 				$result_db=mysqli_query($dbc,$query_db);check_errors($result_db,$query_db);
 			}
 		}

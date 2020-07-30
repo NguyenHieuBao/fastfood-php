@@ -24,6 +24,13 @@
 					    		</a>
 					    	</li>
 					    	<li>
+					    		<a href="thongtintaikhoan.php">
+					    			<i class="glyphicon glyphicon-user">
+					    			</i>
+					    			Thông tin cá nhân
+					    		</a>
+					    	</li>
+					    	<li>
 					    		<a href="dangxuat.php">
 					    			<i class="glyphicon glyphicon-log-out">
 					    			</i>
